@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+.movies-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.movies-wrapper div {
+  margin: 0 10px;
+}
+
+.form-add-movie {
+  background-color: #282c34;
+  padding: 2rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-add-movie .form-input {
+  margin: 10px 0;
+}
+.form-add-movie .form-input label {
+  margin-right: 10px;
+}
