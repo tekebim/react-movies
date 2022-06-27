@@ -2,16 +2,19 @@
   {
     "id": 1,
     "title": "Star Wars : L'attaque des clones",
-    "plot": "Film avec des sabres lasers."
+    "plot": "Film avec des sabres lasers.",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BOGUyZDA1YTYtMDhlMi00ZjkwLTliZDUtMWFlZGUyZmRhMGExXkEyXkFqcGdeQXVyMjExMzI0OTg@._V1_QL75_UX190_CR0,7,190,281_.jpg"
   },
   {
     "id": 2,
     "title": "Joker",
-    "plot": "Un clown pas content"
+    "plot": "Un clown pas content",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BNjhmMWMwYzQtNzU3ZC00ODA4LTk3YjktMzk1YzgwNTVlNGU1XkEyXkFqcGdeQXVyODIyOTEyMzY@._V1_QL75_UX190_CR0,0,190,281_.jpg"
   },
   {
     "id": 3,
     "title": "Jurassic World",
-    "plot": "Des dinosaures qui s'échappent"
+    "plot": "Des dinosaures qui s'échappent",
+    "thumbnail": "https://m.media-amazon.com/images/M/MV5BZmI1YmZkMTItNWU5Mi00YzE5LTg5ODQtMDFhMzA2YWM5ZTEwXkEyXkFqcGdeQXVyMTI0NTE1Njg4._V1_QL75_UY281_CR19,0,190,281_.jpg"
   }
 ]
