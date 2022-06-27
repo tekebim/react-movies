@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import movies from './movies.json';
+// On importe les données content les films, graphQL viendra remplacer ce système
 
 function App() {
   return (
