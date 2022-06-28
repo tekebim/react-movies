@@ -9,6 +9,7 @@ function App() {
 
   const [title, setTitle] = useState("");
   const [plot, setPlot] = useState("");
+  const [poster, setPoster] = useState("");
   const [listMoviesJson, setListMoviesJson] = useState(movies);
   const [listMoviesFound, setListMoviesFound] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -17,7 +18,7 @@ function App() {
   const listMovies = listMoviesJson.map(movie => {
     return <Movie
       key={movie.id}
-      thumbnail={movie.thumbnail}
+      poster={movie.poster}
       title={movie.title}
       plot={movie.plot}
     />
@@ -30,8 +31,9 @@ function App() {
   const handleAddMovie = () => {
     let movie = {
       id: listMoviesJson.length + 1,
-      title: title,
-      plot: plot
+      title,
+      plot,
+      poster
     }
 
     setListMoviesJson([...listMoviesJson, movie]);
@@ -46,6 +48,7 @@ function App() {
     }
 
     setListMoviesJson([...listMoviesJson, item]);
+    setListMoviesFound('');
   }
 
   const getMovieRequest = async () => {
@@ -59,46 +62,62 @@ function App() {
     }
   };
 
+  /*
+  Les composants ont un cycle de vie (trois phases : mounting, updating, unmouting).
+  Par défaut lorsque l'on modifie le state, le composant est mis à jour et il est re-rendu (le code s'exécute à nouveau).
+  Cela peur poser des problèmes : il peut arriver que l'on veuille exécuter une portion de code du composant qu'une seule fois.
+  On peut ajouter un second paramètre (un array), s'il est vide, useEffect ne se déclenchera quand phase mounting.
+  Si on remplit le tableau avec des constantes du state, useEffect en cas de mise à jour ne s'exéctuera qu'en cas de mise à jour.
+   */
+
   useEffect(() => {
     getMovieRequest();
   }, [searchValue]);
 
   return (
-    <div className="App">
-      <div className="movies-wrapper">
-        {listMovies}
-      </div>
-      <div className="form-search-movie">
-        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
-        {listMoviesFound &&
-        <>
-          <h3>{listMoviesFound.length} movie(s) found</h3>
-          <ul className="search-results">
-            {listMoviesFound.map((item, index) => {
-              return <li className={"result__item"}
-                         onClick={() => handleMovieToList(index)}>{item.Title} ({item.Year})</li>
-            })}
-          </ul>
-        </>
-        }
-      </div>
-      <div className="form-add-movie">
-        <div className="form-input">
-          <label htmlFor="title">Titre du film</label>
-          <input type="text" id="title" onChange={(e) => {
-            setTitle(e.target.value);
-          }}/>
+    <div className="site-container">
+      <main className="site-main">
+        <div className="form-search-movie">
+          <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
+          {listMoviesFound &&
+          <>
+            <h3>{listMoviesFound.length} movie(s) found</h3>
+            <ul className="search-results">
+              {listMoviesFound.map((item, index) => {
+                return <li className={"result__item"}
+                           onClick={() => handleMovieToList(index)}>{item.Title} ({item.Year})</li>
+              })}
+            </ul>
+          </>
+          }
         </div>
-        <div className="form-input">
-          <label htmlFor="plot">Synopsis du film</label>
-          <input type="text" id="plot" onChange={(e) => {
-            setPlot(e.target.value);
-          }}/>
+        <div className="form-add-movie">
+          <div className="form-input">
+            <label htmlFor="title">Titre du film</label>
+            <input type="text" id="title" onChange={(e) => {
+              setTitle(e.target.value);
+            }}/>
+          </div>
+          <div className="form-input">
+            <label htmlFor="plot">Synopsis du film</label>
+            <input type="text" id="plot" onChange={(e) => {
+              setPlot(e.target.value);
+            }}/>
+          </div>
+          <div className="form-input">
+            <label htmlFor="poster">Poster</label>
+            <input type="text" id="poster" onChange={(e) => {
+              setPoster(e.target.value);
+            }}/>
+          </div>
+          <div className="form-input">
+            <input type="submit" value={"Valider"} onClick={() => handleAddMovie()}/>
+          </div>
         </div>
-        <div className="form-input">
-          <input type="submit" value={"Valider"} onClick={() => handleAddMovie()}/>
+        <div className="movies-wrapper">
+          {listMovies}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

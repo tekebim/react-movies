@@ -1,5 +1,6 @@
-.App {
-    text-align: center;
+.site-container {
+    background-color: #1d1b24;
+    min-height: 100vh;
 }
 
 .App-logo {
@@ -40,6 +41,7 @@
 .movies-wrapper {
     display: flex;
     justify-content: center;
+    margin: 2rem auto;
 }
 
 .movies-wrapper div {
@@ -85,6 +87,8 @@
 
 .movie-card {
     border: 1px solid grey;
+    color: white;
+    text-align: center;
 }
 
 @media only screen and (min-width: 800px) {
