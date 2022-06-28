@@ -1,62 +1,98 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .movies-wrapper {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .movies-wrapper div {
-  margin: 0 10px;
+    margin: 0 10px;
+}
+
+.form-search-movie {
+    background-color: #7d8eba;
+    padding: 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-search-movie .search-results {
+    list-style: none;
+}
+
+.form-search-movie .search-results .result__item:hover {
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .form-add-movie {
-  background-color: #282c34;
-  padding: 2rem;
-  color: white;
-  display: flex;
-  flex-direction: column;
+    background-color: #282c34;
+    padding: 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-add-movie .form-input {
-  margin: 10px 0;
+    margin: 10px 0;
 }
+
 .form-add-movie .form-input label {
-  margin-right: 10px;
+    margin-right: 10px;
+}
+
+.movie-searchbox .searchbox__input {
+
+}
+
+.movie-card {
+    border: 1px solid grey;
+}
+
+@media only screen and (min-width: 800px) {
+    .movie-card {
+        max-width: 20vw;
+    }
+}
+
+.movie-card .card__thumbnail img {
+    max-height: 250px;
 }
