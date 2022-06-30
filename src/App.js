@@ -4,7 +4,7 @@ import movies from './movies.json';
 import Movie from "./components/Movie";
 import {useEffect, useState} from "react";
 import SearchBox from './components/SearchBox';
-import {useQuery, gql} from "@apollo/client";
+import {useQuery, gql, useMutation} from "@apollo/client";
 
 // useQuery est un hook qui permet de gérer les requêtes Query.
 
@@ -47,6 +47,19 @@ function App() {
         plot={movie.plot}
       />
     })
+  }
+
+  const AddMovie = () => {
+    const ADD_MOVIE = gql`
+        mutation addMovie($movie: MovieInput) {
+            createMovie(movie: $movie){
+                title,
+                plot
+            }
+        }
+    `
+
+    const [addMovie, {loading, data, error}] = useMutation(ADD_MOVIE);
   }
 
   // Le State (ou état) permet de stocker des données de manière locale (par rapport à un compostant). Exemple : les données stockées dans e state de App, ne peuvent pas être utilisées directement dans le composant Movie
@@ -150,6 +163,7 @@ function App() {
           </div>
         </div>
         <div className="movies-wrapper">
+          {listMovies}
           <GetMovies/>
         </div>
       </main>
