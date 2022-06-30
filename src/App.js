@@ -39,21 +39,14 @@ function App() {
     if (loading) return <p>Chargement...</p>;
     if (error) return `Error! ${error.message}`;
 
-    return (
-      <div className={"movies-db-wrapper"}>
-        {
-          data.movies.map((movie) => {
-            console.log(movie);
-            return <Movie
-              key={movie.id}
-              poster={movie.thumbnail}
-              title={movie.title}
-              plot={movie.plot}
-            />
-          })
-        }
-      </div>
-    );
+    return data.movies.map((movie) => {
+      return <Movie
+        key={movie.id}
+        poster={movie.thumbnail}
+        title={movie.title}
+        plot={movie.plot}
+      />
+    })
   }
 
   // Le State (ou état) permet de stocker des données de manière locale (par rapport à un compostant). Exemple : les données stockées dans e state de App, ne peuvent pas être utilisées directement dans le composant Movie
@@ -157,7 +150,7 @@ function App() {
           </div>
         </div>
         <div className="movies-wrapper">
-          {listMovies}
+          <GetMovies/>
         </div>
       </main>
     </div>
