@@ -18,7 +18,7 @@ function App() {
   const listMovies = listMoviesJson.map(movie => {
     return <Movie
       key={movie.id}
-      poster={movie.poster}
+      poster={movie.thumbnail}
       title={movie.title}
       plot={movie.plot}
     />
@@ -84,7 +84,7 @@ function App() {
             <h3>{listMoviesFound.length} movie(s) found</h3>
             <ul className="search-results">
               {listMoviesFound.map((item, index) => {
-                return <li className={"result__item"}
+                return <li className={"result__item"} key={index}
                            onClick={() => handleMovieToList(index)}>{item.Title} ({item.Year})</li>
               })}
             </ul>
