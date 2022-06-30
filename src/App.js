@@ -6,35 +6,14 @@ import {useEffect, useState} from "react";
 import SearchBox from './components/SearchBox';
 import {gql, useMutation} from "@apollo/client";
 import GetMovies from "./components/GetMovies";
+import AddMovies from "./components/AddMovies";
 
 // useQuery est un hook qui permet de gérer les requêtes Query.
 
 function App() {
-
-  const [title, setTitle] = useState("");
-  const [plot, setPlot] = useState("");
-  const [poster, setPoster] = useState("");
   const [listMoviesJson, setListMoviesJson] = useState(movies);
   const [listMoviesFound, setListMoviesFound] = useState('');
   const [searchValue, setSearchValue] = useState('');
-
-  const AddMovie = () => {
-    const ADD_MOVIE = gql`
-        mutation addMovie($movie: MovieInput) {
-            createMovie(movie: $movie){
-                title,
-                plot
-            }
-        }
-    `
-
-    // On utilise une variable dans la mutation pour pouvoir recueillir des données dynamiques.
-    const [addMovie, {loading, data, error}] = useMutation(ADD_MOVIE);
-    // addMovie nous permettra d'envoyer les données àç la variable de la requête
-
-    if (loading) return <p>Chargement...</p>;
-    if (error) return `Error! ${error.message}`;
-  }
 
   // Le State (ou état) permet de stocker des données de manière locale (par rapport à un compostant). Exemple : les données stockées dans e state de App, ne peuvent pas être utilisées directement dans le composant Movie
   const listMovies = listMoviesJson.map(movie => {
@@ -50,16 +29,6 @@ function App() {
   // key permet de rendre unique chaque utilisation du composant Movie
 
   // le JSX est une extension syntaxique du Javascript
-  const handleAddMovie = () => {
-    let movie = {
-      id: listMoviesJson.length + 1,
-      title,
-      plot,
-      poster
-    }
-
-    setListMoviesJson([...listMoviesJson, movie]);
-  }
 
   const handleMovieToList = (index) => {
     let item = {
@@ -113,29 +82,7 @@ function App() {
           </>
           }
         </div>
-        <div className="form-add-movie">
-          <div className="form-input">
-            <label htmlFor="title">Titre du film</label>
-            <input type="text" id="title" onChange={(e) => {
-              setTitle(e.target.value);
-            }}/>
-          </div>
-          <div className="form-input">
-            <label htmlFor="plot">Synopsis du film</label>
-            <input type="text" id="plot" onChange={(e) => {
-              setPlot(e.target.value);
-            }}/>
-          </div>
-          <div className="form-input">
-            <label htmlFor="poster">Poster</label>
-            <input type="text" id="poster" onChange={(e) => {
-              setPoster(e.target.value);
-            }}/>
-          </div>
-          <div className="form-input">
-            <input type="submit" value={"Valider"} onClick={() => handleAddMovie()}/>
-          </div>
-        </div>
+        <AddMovies/>
         <div className="movies-wrapper">
           {listMovies}
           <GetMovies/>

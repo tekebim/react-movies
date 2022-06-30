@@ -23,7 +23,10 @@ const GetMovies = () => {
   if (loading) return <p>Chargement...</p>;
   if (error) return `Error! ${error.message}`;
 
+  console.log(data);
+
   return data.movies.map((movie) => {
+    // console.log(movie);
     return <Movie
       key={movie.id}
       poster={movie.thumbnail}
