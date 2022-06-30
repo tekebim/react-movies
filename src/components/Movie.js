@@ -3,12 +3,12 @@ const Movie = (props) => {
   return (
     <div className={"movie-card"}>
       <figure className={"card__thumbnail"}>
-        {props.poster !== "N/A" &&
+        {(props.poster !== "N/A" && props.poster != null) &&
         <img src={props.poster}
              alt={props.title}/>
         }
 
-        {props.poster === "N/A" &&
+        {(props.poster === "N/A" || props.poster == null) &&
         <img src="movie-default.png"
              alt={props.title}/>
         }
