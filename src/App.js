@@ -83,7 +83,7 @@ function App() {
           }
         </div>
         <AddMovies/>
-        <div className="movies-wrapper">
+        <div className="movies-wrapper">@
           {listMovies}
           <GetMovies/>
         </div>

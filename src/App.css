@@ -78,3 +78,19 @@
     max-height: 250px;
     max-width: 100%;
 }
+
+
+.add-movie-wrapper {
+    text-align: center;
+}
+
+.add-movie-wrapper button {
+    margin: 1em;
+    background-color: indianred;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    transition: background-color ease-in 0.5s;
+    cursor: pointer;
+}
