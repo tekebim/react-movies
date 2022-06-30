@@ -4,6 +4,9 @@ import movies from './movies.json';
 import Movie from "./components/Movie";
 import {useEffect, useState} from "react";
 import SearchBox from './components/SearchBox';
+import {useQuery, gql} from "@apollo/client";
+
+// useQuery est un hook qui permet de gérer les requêtes Query.
 
 function App() {
 
@@ -13,6 +16,45 @@ function App() {
   const [listMoviesJson, setListMoviesJson] = useState(movies);
   const [listMoviesFound, setListMoviesFound] = useState('');
   const [searchValue, setSearchValue] = useState('');
+
+  const GetMovies = () => {
+    // getMovies sera un composant affichant tous les films
+
+    // Première étape, on créé la requête.
+    const GET_MOVIES = gql`
+        query Movies {
+            movies {
+                title,
+                plot
+            }
+        }
+    `
+
+    const {loading, error, data} = useQuery(GET_MOVIES);
+    // data: pour la gestion des données.
+    // loading: pour les différents états de la requête.
+    // error: pour la gestion des erreurs.
+    // useQuery: gère ces trois éléments.
+
+    if (loading) return <p>Chargement...</p>;
+    if (error) return `Error! ${error.message}`;
+
+    return (
+      <div className={"movies-db-wrapper"}>
+        {
+          data.movies.map((movie) => {
+            console.log(movie);
+            return <Movie
+              key={movie.id}
+              poster={movie.thumbnail}
+              title={movie.title}
+              plot={movie.plot}
+            />
+          })
+        }
+      </div>
+    );
+  }
 
   // Le State (ou état) permet de stocker des données de manière locale (par rapport à un compostant). Exemple : les données stockées dans e state de App, ne peuvent pas être utilisées directement dans le composant Movie
   const listMovies = listMoviesJson.map(movie => {
