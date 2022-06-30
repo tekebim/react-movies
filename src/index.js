@@ -3,11 +3,30 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {ApolloClient, InMemoryCache, ApolloProvider, gql} from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: 'http://localhost:3111/movie',
+  cache: new InMemoryCache()
+});
+
+// L'instance d'ApolloClient permet d'établir une connexion avec le serveur. L'instance va aussi nous proposer des méthodes pour travailler efficacement avec graphQL
+
+client.query({
+  query: gql`
+    query Movies {
+        movies {
+            title,
+            plot
+        }
+    }
+  `
+}).then((result) => console.log(result));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App/>
   </React.StrictMode>
 );
 
