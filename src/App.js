@@ -1,17 +1,15 @@
 import './App.css';
-import movies from './movies.json';
 // On importe les données content les films, graphQL viendra remplacer ce système
 import Movie from "./components/Movie";
 import {useEffect, useState} from "react";
 import SearchBox from './components/SearchBox';
-import {gql, useMutation} from "@apollo/client";
 import GetMovies from "./components/GetMovies";
 import AddMovies from "./components/AddMovies";
 
 // useQuery est un hook qui permet de gérer les requêtes Query.
 
 function App() {
-  const [listMoviesJson, setListMoviesJson] = useState(movies);
+  const [listMoviesJson, setListMoviesJson] = useState([]);
   const [listMoviesFound, setListMoviesFound] = useState('');
   const [searchValue, setSearchValue] = useState('');
 
