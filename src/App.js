@@ -4,7 +4,8 @@ import movies from './movies.json';
 import Movie from "./components/Movie";
 import {useEffect, useState} from "react";
 import SearchBox from './components/SearchBox';
-import {useQuery, gql, useMutation} from "@apollo/client";
+import {gql, useMutation} from "@apollo/client";
+import GetMovies from "./components/GetMovies";
 
 // useQuery est un hook qui permet de gérer les requêtes Query.
 
@@ -17,38 +18,6 @@ function App() {
   const [listMoviesFound, setListMoviesFound] = useState('');
   const [searchValue, setSearchValue] = useState('');
 
-  const GetMovies = () => {
-    // getMovies sera un composant affichant tous les films
-
-    // Première étape, on créé la requête.
-    const GET_MOVIES = gql`
-        query Movies {
-            movies {
-                title,
-                plot
-            }
-        }
-    `
-
-    const {loading, error, data} = useQuery(GET_MOVIES);
-    // data: pour la gestion des données.
-    // loading: pour les différents états de la requête.
-    // error: pour la gestion des erreurs.
-    // useQuery: gère ces trois éléments.
-
-    if (loading) return <p>Chargement...</p>;
-    if (error) return `Error! ${error.message}`;
-
-    return data.movies.map((movie) => {
-      return <Movie
-        key={movie.id}
-        poster={movie.thumbnail}
-        title={movie.title}
-        plot={movie.plot}
-      />
-    })
-  }
-
   const AddMovie = () => {
     const ADD_MOVIE = gql`
         mutation addMovie($movie: MovieInput) {
@@ -59,7 +28,12 @@ function App() {
         }
     `
 
+    // On utilise une variable dans la mutation pour pouvoir recueillir des données dynamiques.
     const [addMovie, {loading, data, error}] = useMutation(ADD_MOVIE);
+    // addMovie nous permettra d'envoyer les données àç la variable de la requête
+
+    if (loading) return <p>Chargement...</p>;
+    if (error) return `Error! ${error.message}`;
   }
 
   // Le State (ou état) permet de stocker des données de manière locale (par rapport à un compostant). Exemple : les données stockées dans e state de App, ne peuvent pas être utilisées directement dans le composant Movie
